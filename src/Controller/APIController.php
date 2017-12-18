@@ -69,6 +69,7 @@ class APIController extends AppController
                     //$this->set('accessCard', $cardQuery['access_level']);
                     //$this->set('accessStation', $query['accessLevelRequired']);
                     return $response;
+                    
                 }
             }
 
