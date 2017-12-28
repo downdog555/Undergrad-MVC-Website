@@ -76,7 +76,7 @@ class AppController extends Controller
  
       //  $this->Auth->allow([ 'view', 'index']);
         
-
+		$this->Auth->allow([ 'verify']);
         /*
          * Enable the following components for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html

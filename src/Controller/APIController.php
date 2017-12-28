@@ -42,23 +42,27 @@ class APIController extends AppController
     ->where(['stationKey =' => $stationKey])->first();
         if(strlen($query) === 0)
         {
-            $response = $this->response->withStatus(404);
+            $response = $this->response->withStatus(403);
             return $response;
         }
         else
         {
             //we then need to check if card is valid 
             $cardQuery = $this->Cards->find()->where(['manufacturedata ='=>$manufaturerData, 'assigneddata ='=>$assignedData])->first();
-            if(strlen($cardQuery) === 0)
+            if(strlen($cardQuery) == 0)
             {
-                $response = $this->response->withStatus(404);
-                return $response;
+
+                //$response = $this->response->withStatus(404);
+                //return $response;
+                $this->set('man', $manufaturerData);
+                $this->set('ass', $assignedData);
+                
             }
             else
             {
                 //we then need to check if the access level is correct
                 //if not pass 404
-                if($cardQuery['access_level'] == $query['accessLevelRequired'])
+                if($cardQuery['access_level'] >= $query['accessLevelRequired'])
                 {
                     $response = $this->response->withStatus(200);
                     return $response;
@@ -81,7 +85,7 @@ class APIController extends AppController
         //if its not 404 or 403
 
         
-        $this->set('data', $cardQuery);
-        $this->set('queryData', $query);
+        //$this->set('data', $cardQuery[0]);
+        $this->set('queryData', $cardQuery);
     }
 }
