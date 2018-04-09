@@ -45,9 +45,12 @@ $cakeDescription = 'HR System';
           
         </li>
         <?php
-          if($employee['jobType'] === 'admin' || $employee['jobType'] === 'manager')
+          if($employee['jobType'] === 'admin' || $employee['jobType'] === 'manager' || $employee['jobType'] === 'receptionist')
           {
               echo('<li>'.$this->Html->link('View Employees', ['controller' => 'Employees' ,'action' => 'index']).'</li>');
+              echo('<li>'.$this->Html->link('View All Cards', ['controller' => 'Cards' ,'action' => 'index']).'</li>');
+              echo('<li>'.$this->Html->link('View All Stations', ['controller' => 'Stations' ,'action' => 'index']).'</li>');
+              echo('<li>'.$this->Html->link('View All Employees Currently In Building', ['controller' => 'Employees' ,'action' => 'listincurrently']).'</li>');
           }
 
         ?>

@@ -14,6 +14,8 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Stations'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Accesslogs'), ['controller' => 'Accesslogs', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Accesslog'), ['controller' => 'Accesslogs', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="stations form large-9 medium-8 columns content">
@@ -24,6 +26,7 @@
             echo $this->Form->control('name');
             echo $this->Form->control('description');
             echo $this->Form->control('accessLevelRequired');
+            echo $this->Form->control('stationKey');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

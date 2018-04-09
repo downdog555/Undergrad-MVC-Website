@@ -8,6 +8,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Station'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Accesslogs'), ['controller' => 'Accesslogs', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Accesslog'), ['controller' => 'Accesslogs', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="stations index large-9 medium-8 columns content">
@@ -17,7 +19,7 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('accessLevelRequired') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('stationKey') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -26,7 +28,7 @@
             <tr>
                 <td><?= $this->Number->format($station->id) ?></td>
                 <td><?= h($station->accessLevelRequired) ?></td>
-                <td><?= h($station->name) ?></td>
+                <td><?= h($station->stationKey) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $station->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $station->id]) ?>

@@ -28,15 +28,7 @@ use Cake\Event\Event;
 class AppController extends Controller
 {
 
-    public function isAuthorized($user)
-{
-	if(isset($user))
-	{
-		return true;
-	}
-    // By default deny access.
-    return false;
-}
+   
     /**
      * Initialization hook method.
      *
@@ -56,7 +48,7 @@ class AppController extends Controller
 
 
         $this->loadComponent('Auth', [
-             'authorize'=> 'Controller',
+             'authorize'=> 'Test',
              'authenticate' => [
                 'Form' => [
                     'fields' => [
@@ -69,8 +61,8 @@ class AppController extends Controller
                 'controller' => 'Employees',
                 'action' => 'login'
             ],
-             // If unauthorized, return them to page they were just on
-            'unauthorizedRedirect' => $this->referer()
+             
+            'unauthorizedRedirect' => array('controller' => 'Employees','action' => 'login' )
         ]);
 
  

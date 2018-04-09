@@ -86,21 +86,21 @@ public function logout()
      */
     public function edit($id = null)
     {
-        $employee = $this->Employees->get($id, [
+        $employeeEdit = $this->Employees->get($id, [
             'contain' => []
         ]);
         
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $employee = $this->Employees->patchEntity($employee, $this->request->getData());
-            if ($this->Employees->save($employee)) {
+            $employeeEdit = $this->Employees->patchEntity($employeeEdit, $this->request->getData());
+            if ($this->Employees->save($employeeEdit)) {
                 $this->Flash->success(__('The employee has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The employee could not be saved. Please, try again.'));
         }
-        $this->set(compact('employee'));
-        $this->set('_serialize', ['employee']);
+        $this->set('employeeEdit', $employeeEdit);
+        $this->set('_serialize', ['employeeEdit']);
     }
 
     /**
@@ -123,6 +123,11 @@ public function logout()
         return $this->redirect(['action' => 'index']);
     }
 
+/**
+* Login Method
+*
+*
+**/
      public function login()
     {
         if ($this->request->is('post'))
@@ -131,7 +136,8 @@ public function logout()
             if ($employee) 
             {
                 $this->Auth->setUser($employee);
-                return $this->redirect($this->Auth->redirectUrl());
+                return $this->redirect(array('controller'=>'Employees','action'=>'view',$employee['id']));
+
             }
         $this->Flash->error('Your username or password is incorrect.');
         }
@@ -143,5 +149,18 @@ public function logout()
 
         $this->set('query', $query);
 
+    }
+
+    /**
+        
+
+
+    Function to list the people currently in building
+
+    **/
+    public function listincurrently()
+    {
+        $query = $this->Employees->find()->select(['id', 'name', 'address', 'contactNumber'])->where(['currentlyin' => '1']);
+        $this->set('employeesInBuilding', $query);
     }
 }

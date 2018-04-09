@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Employees Model
  *
+ * @property \App\Model\Table\CardsTable|\Cake\ORM\Association\HasMany $Cards
+ *
  * @method \App\Model\Entity\Employee get($primaryKey, $options = [])
  * @method \App\Model\Entity\Employee newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Employee[] newEntities(array $data, array $options = [])
@@ -34,29 +36,9 @@ class EmployeesTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-                // Add the behaviour to your table
-        $this->addBehavior('Search.Search');
-
-        // Setup search filter using search manager
-        $this->searchManager()
-            ->value('author_id')
-            // Here we will alias the 'q' query param to search the `Articles.title`
-            // field and the `Articles.content` field, using a LIKE match, with `%`
-            // both before and after.
-            ->add('q', 'Search.Like', [
-                'before' => true,
-                'after' => true,
-                'fieldMode' => 'OR',
-                'comparison' => 'LIKE',
-                'wildcardAny' => '*',
-                'wildcardOne' => '?',
-                'field' => ['title', 'content']
-            ])
-            ->add('foo', 'Search.Callback', [
-                'callback' => function ($query, $args, $filter) {
-                    // Modify $query as required
-                }
-            ]);
+        $this->hasMany('Cards', [
+            'foreignKey' => 'employee_id'
+        ]);
     }
 
     /**
@@ -102,10 +84,20 @@ class EmployeesTable extends Table
             ->notEmpty('password');
 
         $validator
+            ->integer('hoursRequiredWeekly')
+            ->requirePresence('hoursRequiredWeekly', 'create')
+            ->notEmpty('hoursRequiredWeekly');
+
+        $validator
             ->scalar('jobType')
             ->maxLength('jobType', 255)
             ->requirePresence('jobType', 'create')
             ->notEmpty('jobType');
+
+        $validator
+            ->integer('CurrentlyIn')
+            ->requirePresence('CurrentlyIn', 'create')
+            ->notEmpty('CurrentlyIn');
 
         return $validator;
     }

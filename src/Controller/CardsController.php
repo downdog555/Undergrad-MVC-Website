@@ -113,4 +113,16 @@ class CardsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+    *Method to view emplyees card
+    *
+    */
+    public function viewEmployeeCard($id = null)
+    {
+         $card = $this->Cards->find('all')->where(['employee_id = '=>$id])->contain(['Employees']);
+
+        $this->set('cards', $card);
+        $this->set('_serialize', ['card']);
+    }
 }

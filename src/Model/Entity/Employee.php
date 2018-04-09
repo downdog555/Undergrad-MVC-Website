@@ -2,7 +2,6 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
-use Cake\Auth\DefaultPasswordHasher;
 
 /**
  * Employee Entity
@@ -13,7 +12,11 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property string $contactNumber
  * @property string $username
  * @property string $password
+ * @property int $hoursRequiredWeekly
  * @property string $jobType
+ * @property int $CurrentlyIn
+ *
+ * @property \App\Model\Entity\Card[] $cards
  */
 class Employee extends Entity
 {
@@ -33,7 +36,10 @@ class Employee extends Entity
         'contactNumber' => true,
         'username' => true,
         'password' => true,
-        'jobType' => true
+        'hoursRequiredWeekly' => true,
+        'jobType' => true,
+        'CurrentlyIn' => true,
+        'cards' => true
     ];
 
     /**
@@ -44,13 +50,4 @@ class Employee extends Entity
     protected $_hidden = [
         'password'
     ];
-
-    protected function _setPassword($value)
-    {
-        if (strlen($value)) {
-            $hasher = new DefaultPasswordHasher();
-
-            return $hasher->hash($value);
-        }
-    }
 }

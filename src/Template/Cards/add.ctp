@@ -23,6 +23,6 @@
             echo $this->Form->control('employee_id', ['options' => $employees]);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+     <?= $this->Form->button('Submit', ['class' => 'button primary']) ?>
     <?= $this->Form->end() ?>
 </div>

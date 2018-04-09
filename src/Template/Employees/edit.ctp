@@ -6,34 +6,24 @@
 //$employee = $this->request->session()->read('Auth.Employee');
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $employee['id']],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $employee['id'])]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Employees'), ['action' => 'index']) ?></li>
-    </ul>
+     <?php echo('<li>'.$this->Html->link(__('Back'), ['action' => 'view', $employeeEdit['id']]).'</li>'); ?>
 </nav>
-<?php
 
-print_r($employee);
-?>
 <div class="employees form large-9 medium-8 columns content">
-    <?= $this->Form->create((object) $employee) ?>
+    <?= $this->Form->create((object) $employeeEdit) ?>
     <fieldset>
         <legend><?= __('Edit Employee') ?></legend>
         <?php
-            echo $this->Form->control('name' ,['value' => $employee['name']]);
-            echo $this->Form->control('address' ,['value' => $employee['address']]);
-            echo $this->Form->control('contactNumber' ,['value' => $employee['contactNumber']]);
-            echo $this->Form->control('username' ,['value' => $employee['username']]);
+            echo $this->Form->control('name' ,['value' => $employeeEdit['name']]);
+            echo $this->Form->control('address' ,['value' => $employeeEdit['address']]);
+            echo $this->Form->control('contactNumber' ,['value' => $employeeEdit['contactNumber']]);
+            echo $this->Form->control('username' ,['value' => $employeeEdit['username']]);
             echo $this->Form->control('password' );
-            echo $this->Form->control('jobType' ,['value' => $employee['jobType']]);
+            echo $this->Form->control('jobType' ,['value' => $employeeEdit['jobType']]);
+            echo $this->Form->control('hoursRequiredWeekly' ,['value' => $employeeEdit['hoursRequiredWeekly']]);           
+
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button('Submit', ['class' => 'button primary']) ?>
     <?= $this->Form->end() ?>
 </div>

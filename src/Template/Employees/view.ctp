@@ -10,27 +10,32 @@
         <?php
             if($employee && $employee['jobType'] === 'admin')
             {
-                echo( "<li>".$this->Form->postLink(__('Delete Employee'), ['action' => 'delete', $employee['id']], ['confirm' => __('Are you sure you want to delete # {0}?', $employee['id'])]).'</li>');
-                echo('<li>'.$this->Html->link(__('Edit Employee'), ['action' => 'edit', $employee['id']]).'</li>');
+                echo( "<li>".$this->Form->postLink(__('Delete Employee'), ['action' => 'delete', $employeeView['id']], ['confirm' => __('Are you sure you want to delete # {0}?', $employeeView['id'])]).'</li>');
+                echo('<li>'.$this->Html->link(__('Edit Employee'), ['action' => 'edit', $employeeView['id']]).'</li>');
                 echo('<li>'.$this->Html->link(__('List Employees'), ['action' => 'index']).'</li>');
+                echo('<li>'.$this->Html->link(__('New Employee'), ['action' => 'add']) .'</li>');
+                echo('<li>'.$this->Html->link(__('View Assigned Cards'), ['controller' => 'cards' ,'action' => 'viewEmployeeCard',  $employeeView['id']]).'</li>');
             }
-            if($employee && $employee['jobType'] === 'manager')
+            elseif($employee && $employee['jobType'] === 'manager')
             {
-                echo('<li>'.$this->Html->link(__('Edit Employee'), ['action' => 'edit', $employee['id']]).'</li>');
+                echo('<li>'.$this->Html->link(__('Edit Employee'), ['action' => 'edit', $employeeView['id']]).'</li>');
                 echo('<li>'.$this->Html->link(__('List Employees'), ['action' => 'index']).'</li>');
+                echo('<li>'.$this->Html->link(__('New Employee'), ['action' => 'add']) .'</li>');
+                echo('<li>'.$this->Html->link(__('View Assigned Cards'), ['controller' => 'cards' ,'action' => 'viewEmployeeCard',  $employeeView['id']]).'</li>');
         
             }
-            if($employee && $employee['id'] == $employeeView['id'])
+            elseif($employee && $employee['id'] == $employeeView['id'])
             {
                 if($employee['jobType'] != 'manager' && $employee['jobType'] != 'admin')
                 {
-                echo('<li>'.$this->Html->link(__('Edit Employee'), ['action' => 'edit', $employee['id']]).'</li>');
+                echo('<li>'.$this->Html->link(__('Edit Details'), ['action' => 'edit', $employee['id']]).'</li>');
+                echo('<li>'.$this->Html->link(__('View Assigned Cards'), ['controller' => 'cards' ,'action' => 'viewEmployeeCard',  $employeeView['id']]).'</li>');
             }
             }
 
         ?>
        
-        <li><?= $this->Html->link(__('New Employee'), ['action' => 'add']) ?> </li>
+      
     </ul>
 </nav>
 <div class="employees view large-9 medium-8 columns content">
@@ -57,8 +62,15 @@
             <td><?= h($employeeView['jobType']) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('hoursRequiredWeekly') ?></th>
+            <td><?= $this->Number->format($employeeView['hoursRequiredWeekly']) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($employeeView['id']) ?></td>
         </tr>
     </table>
+</div>
+<div class="">
+	<!--User Metrics-->
 </div>

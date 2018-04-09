@@ -11,6 +11,8 @@ use Cake\ORM\Entity;
  * @property string $description
  * @property string $accessLevelRequired
  * @property string $stationKey
+ *
+ * @property \App\Model\Entity\Accesslog[] $accesslogs
  */
 class Station extends Entity
 {
@@ -28,6 +30,7 @@ class Station extends Entity
         'name' => true,
         'description' => true,
         'accessLevelRequired' => true,
-        'stationKey' => true
+        'stationKey' => true,
+        'accesslogs' => true
     ];
 }

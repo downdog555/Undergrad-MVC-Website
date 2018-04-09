@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Stations Model
  *
- * @property |\Cake\ORM\Association\HasMany $Accesslogs
+ * @property \App\Model\Table\AccesslogsTable|\Cake\ORM\Association\HasMany $Accesslogs
  *
  * @method \App\Model\Entity\Station get($primaryKey, $options = [])
  * @method \App\Model\Entity\Station newEntity($data = null, array $options = [])

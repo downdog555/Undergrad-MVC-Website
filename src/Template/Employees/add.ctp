@@ -21,8 +21,9 @@
             echo $this->Form->control('username');
             echo $this->Form->control('password');
             echo $this->Form->control('jobType');
+            echo $this->Form->control('hoursRequiredWeekly');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button('Submit', ['class' => 'button primary']) ?>
     <?= $this->Form->end() ?>
 </div>

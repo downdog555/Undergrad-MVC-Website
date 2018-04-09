@@ -23,7 +23,9 @@ class EmployeesFixture extends TestFixture
         'contactNumber' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'username' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'password' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'hoursRequiredWeekly' => ['type' => 'integer', 'length' => 255, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'jobType' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'CurrentlyIn' => ['type' => 'integer', 'length' => 1, 'unsigned' => false, 'null' => false, 'default' => '0', 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
@@ -47,7 +49,9 @@ class EmployeesFixture extends TestFixture
             'contactNumber' => 'Lorem ipsum dolor sit amet',
             'username' => 'Lorem ipsum dolor sit amet',
             'password' => 'Lorem ipsum dolor sit amet',
-            'jobType' => 'Lorem ipsum dolor sit amet'
+            'hoursRequiredWeekly' => 1,
+            'jobType' => 'Lorem ipsum dolor sit amet',
+            'CurrentlyIn' => 1
         ],
     ];
 }
