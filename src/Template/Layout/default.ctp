@@ -17,7 +17,7 @@ $cakeDescription = 'HR System';
     
     <?= $this->Html->css('foundation.css') ?>
     <?= $this->Html->css('app.css') ?>
-
+      
     <?= $this->fetch('meta') ?>
 
 </head>
@@ -81,6 +81,7 @@ $cakeDescription = 'HR System';
 
     <div class="grid-x grid-padding-x">
         <div class="large-12 cell">
+          <?= $this->Html->script('Chart.min'); ?>
           <div class="">
               <?= $this->fetch('content') ?>
           </div>
@@ -92,6 +93,7 @@ $cakeDescription = 'HR System';
         <?= $this->Html->script('vendor/what-input'); ?>
         <?= $this->Html->script('vendor/foundation'); ?>
         <?= $this->Html->script('app'); ?>
+  
     
    
     </footer>

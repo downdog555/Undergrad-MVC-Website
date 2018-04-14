@@ -163,4 +163,33 @@ public function logout()
         $query = $this->Employees->find()->select(['id', 'name', 'address', 'contactNumber'])->where(['currentlyin' => '1']);
         $this->set('employeesInBuilding', $query);
     }
+
+
+
+    /**
+
+        Function to view the realted charts 
+
+        $id is id of employee, or null by default
+
+    **/
+    public function viewCharts($id = null)
+    {
+         $employee = $this->Employees->get($id, [
+            'contain' => []
+        ]);
+
+        $this->set('employeeView', $employee);
+        $this->set('_serialize', ['employee']);
+
+        $cardId  = $this->Cards->find()->where('employee_id'=>$employee['id']);
+        //we need method to compare entries, order by the date and time, 
+        $dataForAll = $this->Accesslogs-find()->where('card_id' => $cardId)->order(['time_accessed']);
+        //for this data set, go through make pairs and get the time differnece between
+        //have variables for each month add that to it
+        //then load into next file
+        //we need to set different data for each graph 
+        //total hours worked, per month, per week, for past year
+        //
+    }
 }

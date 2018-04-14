@@ -17,7 +17,9 @@ class CardsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.cards',
-        'app.employees'
+        'app.employees',
+        'app.accesslogs',
+        'app.stations'
     ];
 
     /**
@@ -66,6 +68,16 @@ class CardsControllerTest extends IntegrationTestCase
      * @return void
      */
     public function testDelete()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test viewEmployeeCard method
+     *
+     * @return void
+     */
+    public function testViewEmployeeCard()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

@@ -57,6 +57,13 @@ class TestAuthorize extends BaseAuthorize
                 	}
                 	
                 }
+                elseif($request->getParam('action') == 'viewCharts')
+                {
+                    if($employee->id == $request->getParam('pass')[0])
+                    {
+                        $authorized = true;
+                    }
+                }
                 else
                 {
                 	$authorized = false;
