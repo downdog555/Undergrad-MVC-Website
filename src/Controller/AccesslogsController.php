@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use GuzzleHttp\Client;
 /**
  * Accesslogs Controller
  *

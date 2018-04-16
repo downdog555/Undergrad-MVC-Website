@@ -175,6 +175,8 @@ public function logout()
     **/
     public function viewCharts($id = null)
     {
+          $this->loadModel('Cards');
+           $this->loadModel('Accesslogs');
          $employee = $this->Employees->get($id, [
             'contain' => []
         ]);
@@ -182,9 +184,26 @@ public function logout()
         $this->set('employeeView', $employee);
         $this->set('_serialize', ['employee']);
 
-        $cardId  = $this->Cards->find()->where('employee_id'=>$employee['id']);
+        $cardId  = $this->Cards->find()->select(['id'])->where(['employee_id'=>$employee['id']])->first();
+
+        //$cardId = $cardId->all();
+       
         //we need method to compare entries, order by the date and time, 
-        $dataForAll = $this->Accesslogs-find()->where('card_id' => $cardId)->order(['time_accessed']);
+        $dataForAll = "meow";
+        $dataForAll = $this->Accesslogs->find()->where(['card_id' => $cardId['id']])->order(['time_accessed']);
+        /**
+        $dataInArray = array();
+        foreach ($dataForAll as $temp) {
+            array_push($dataInArray, $this->Time->format($temp['time_accessed']));
+            
+        }
+
+        $dataForAll = sizeof($dataInArray);
+
+**/
+
+        $this->set('data', $dataForAll);
+     
         //for this data set, go through make pairs and get the time differnece between
         //have variables for each month add that to it
         //then load into next file

@@ -3,7 +3,7 @@ namespace App\Test\TestCase\Controller;
 
 use App\Controller\EmployeesController;
 use Cake\TestSuite\IntegrationTestCase;
-
+use GuzzleHttp\Client;
 /**
  * App\Controller\EmployeesController Test Case
  */
@@ -22,15 +22,27 @@ class EmployeesControllerTest extends IntegrationTestCase
         'app.stations'
     ];
 
-    /**
-     * Test initialize method
-     *
-     * @return void
-     */
-    public function testInitialize()
+ 
+
+
+  public function setUp()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        parent::setUp();
+
     }
+
+
+public function testUnauthenticatedFails()
+{
+    // No session data set.
+    $this->get('/employees/index');
+
+    $this->assertRedirect('/employees/login?redirect=%2Femployees%2Findex');
+}
+
+
+
+
 
     /**
      * Test logout method
@@ -39,7 +51,42 @@ class EmployeesControllerTest extends IntegrationTestCase
      */
     public function testLogout()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        
+ // create our http client (Guzzle)
+  $client = new Client([
+    // Base URI is used with relative requests
+    'base_uri' => 'http://localhost/',
+    // You can set any number of default request options.
+    'timeout'  => 10,
+]);
+
+
+
+
+
+//print_r( $resp->getHeader('Set-Cookie'));
+       $response = $client->request('POST', 'dissetation/employees/login', [
+    'form_params' => [
+        'password' => 'Test1',
+        'username' => 'test@test.com'
+        
+    ]
+]);
+
+
+
+  
+    $response = $client->request('GET', 'dissetation/employees');
+ //$response = $client->send($request);
+ $this->assertEquals(200, $response->getStatusCode());
+//means we are loggedin
+ $response = $client->request('GET', 'dissetation/employees/logout');
+
+ $responseNew = $client->request('GET', 'dissetation/employees');
+// echo($responseNew->getStatusCode());
+ //echo($responseNew->getBody());
+ //$response = $client->send($request);
+ $this->assertEquals(200, $responseNew->getStatusCode());
     }
 
     /**
@@ -49,7 +96,38 @@ class EmployeesControllerTest extends IntegrationTestCase
      */
     public function testIndex()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+         //$this->enableCsrfToken();
+    //$this->enableSecurityToken();
+
+ // create our http client (Guzzle)
+  $client = new Client([
+    // Base URI is used with relative requests
+    'base_uri' => 'http://localhost/',
+    // You can set any number of default request options.
+    'timeout'  => 10,
+]);
+
+
+
+
+
+//print_r( $resp->getHeader('Set-Cookie'));
+       $response = $client->request('POST', 'dissetation/employees/login', [
+    'form_params' => [
+        'password' => 'Test1',
+        'username' => 'test@test.com'
+        
+    ]
+]);
+
+
+
+  
+    $response = $client->request('GET', 'dissetation/employees');
+ //$response = $client->send($request);
+ $this->assertEquals(200, $response->getStatusCode());
+
+    
     }
 
     /**
@@ -99,7 +177,34 @@ class EmployeesControllerTest extends IntegrationTestCase
      */
     public function testLogin()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        
+ // create our http client (Guzzle)
+  $client = new Client([
+    // Base URI is used with relative requests
+    'base_uri' => 'http://localhost/',
+    // You can set any number of default request options.
+    'timeout'  => 10,
+]);
+
+
+
+
+
+//print_r( $resp->getHeader('Set-Cookie'));
+       $response = $client->request('POST', 'dissetation/employees/login', [
+    'form_params' => [
+        'password' => 'Test1',
+        'username' => 'test@test.com'
+        
+    ]
+]);
+
+
+
+  
+    $response = $client->request('GET', 'dissetation/employees');
+ //$response = $client->send($request);
+ $this->assertEquals(200, $response->getStatusCode());
     }
 
     /**

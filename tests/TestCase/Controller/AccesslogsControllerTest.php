@@ -3,7 +3,7 @@ namespace App\Test\TestCase\Controller;
 
 use App\Controller\AccesslogsController;
 use Cake\TestSuite\IntegrationTestCase;
-
+use GuzzleHttp\Client;
 /**
  * App\Controller\AccesslogsController Test Case
  */
@@ -22,6 +22,18 @@ class AccesslogsControllerTest extends IntegrationTestCase
         'app.stations'
     ];
 
+
+
+
+public function testUnauthenticatedFails()
+{
+    // No session data set.
+    $this->get('/accesslogs/index');
+
+    $this->assertRedirect('/employees/login?redirect=%2Faccesslogs%2Findex');
+}
+
+
     /**
      * Test index method
      *
@@ -29,7 +41,32 @@ class AccesslogsControllerTest extends IntegrationTestCase
      */
     public function testIndex()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+  $client = new Client([
+    // Base URI is used with relative requests
+    'base_uri' => 'http://localhost/',
+    // You can set any number of default request options.
+    'timeout'  => 10,
+]);
+
+
+
+
+
+//print_r( $resp->getHeader('Set-Cookie'));
+       $response = $client->request('POST', 'dissetation/employees/login', [
+    'form_params' => [
+        'password' => 'Test1',
+        'username' => 'test@test.com'
+        
+    ]
+]);
+
+
+
+  
+    $response = $client->request('GET', 'dissetation/accesslogs');
+ //$response = $client->send($request);
+ $this->assertEquals(200, $response->getStatusCode());
     }
 
     /**
